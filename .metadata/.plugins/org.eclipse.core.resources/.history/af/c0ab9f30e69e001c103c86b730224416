@@ -1,0 +1,16 @@
+
+public class Main {
+
+	public static void main(String[] args) {
+		ListaEstatica lista = new ListaEstatica();
+		
+		for(int i = 0; i < 22; i++) {
+			lista.inserir(i);
+		}
+		
+		lista.retirar(5);
+		
+		System.out.println(lista.exibir());
+	}
+
+}
