@@ -73,4 +73,27 @@ public class ListaEstatica {
 			this.inserir(outra.info[i]);
 		}
 	}
+	
+	public ListaEstatica dividir() {
+		ListaEstatica novaLista = new ListaEstatica();
+		
+		int tamanhoEstatico = tamanho/2;
+		
+		for(int i = 0; i < tamanhoEstatico; i++) {
+			novaLista.inserir(info[0]);
+			this.retirar(info[0]);
+		}
+		
+		return novaLista;
+	}
+	
+	public ListaEstatica copiar() {
+		ListaEstatica novaLista = new ListaEstatica();
+		
+		for(int i = 0; i < tamanho; i++) {
+			novaLista.inserir(info[i]);
+		}
+		
+		return novaLista;
+	}
 }
