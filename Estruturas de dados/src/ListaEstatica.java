@@ -1,5 +1,5 @@
 
-public class ListaEstatica {
+public class ListaEstatica implements Lista {
 	private int[] info;
 	private int tamanho;
 	
@@ -20,6 +20,7 @@ public class ListaEstatica {
 		info = novo;
 	}
 	
+	@Override
 	public void inserir(int valor) {
 		if(tamanho == info.length) {
 			redimensionar();
@@ -29,6 +30,17 @@ public class ListaEstatica {
 		tamanho++;
 	}
 	
+	@Override
+	public void inserir(int valor, int pos) {
+		if(tamanho == info.length) {
+			redimensionar();
+		}
+		
+		info[pos] = valor;
+		tamanho++;
+	}
+	
+	@Override
 	public int buscar(int valor) {
 		for(int i = 0; i < tamanho; i++) {
 			if(info[i] == valor) {
@@ -39,6 +51,7 @@ public class ListaEstatica {
 		return -1;
 	}
 	
+	@Override
 	public void retirar(int valor) {
 		int local = buscar(valor);
 		info[local] = 0;
@@ -50,6 +63,7 @@ public class ListaEstatica {
 		tamanho--;
 	}
 	
+	@Override
 	public String exibir() {
 		String vetor = "Vetor:";
 		
@@ -60,6 +74,7 @@ public class ListaEstatica {
 		return vetor;
 	}
 	
+	@Override
 	public boolean estaVazia() {
 		if(tamanho == 0) {
 			return true;
@@ -68,14 +83,16 @@ public class ListaEstatica {
 		return false;
 	}
 	
-	public void concatenar(ListaEstatica outra) {
-		for(int i = 0; i < outra.tamanho; i++) {
-			this.inserir(outra.info[i]);
+	@Override
+	public void concatenar(Lista outra) {
+		for(int i = 0; i < outra.getTamanho(); i++) {
+			this.inserir(outra.pegar(i));
 		}
 	}
 	
-	public ListaEstatica dividir() {
-		ListaEstatica novaLista = new ListaEstatica();
+	@Override
+	public Lista dividir() {
+		Lista novaLista = new ListaEstatica();
 		
 		int tamanhoEstatico = tamanho/2;
 		
@@ -87,13 +104,24 @@ public class ListaEstatica {
 		return novaLista;
 	}
 	
-	public ListaEstatica copiar() {
-		ListaEstatica novaLista = new ListaEstatica();
+	@Override
+	public Lista copiar() {
+		Lista novaLista = new ListaEstatica();
 		
 		for(int i = 0; i < tamanho; i++) {
 			novaLista.inserir(info[i]);
 		}
 		
 		return novaLista;
+	}
+
+	@Override
+	public int getTamanho() {
+		return this.tamanho;
+	}
+
+	@Override
+	public int pegar(int pos) {
+		return info[pos];
 	}
 }
