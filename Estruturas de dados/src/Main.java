@@ -2,7 +2,7 @@
 public class Main {
 
 	public static void main(String[] args) {
-		Lista lista = new ListaEstatica();
+		Lista<Integer> lista = new ListaEstatica<>();
 		
 		for(int i = 1; i <= 20; i++) {
 			lista.inserir(i);
