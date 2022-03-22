@@ -1,3 +1,4 @@
+
 public class ListaEncadeada implements Lista {
 
 	private NoLista primeiro;

@@ -19,6 +19,8 @@ public interface Lista {
 
 	int getTamanho();
 
+	void inserir(int valor, int pos);
+
 	int pegar(int pos);
 
 }
