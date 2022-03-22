@@ -10,12 +10,13 @@ public class ListaEncadeada implements Lista {
 	public void inserir(int valor) {
 		NoLista novo = new NoLista();
 		novo.setInfo(valor);
-		novo.setProximo(null);
+		
 		if(this.estaVazia()) {
 			primeiro = novo;
 		} else {
-			ultimo.setProximo(primeiro);
+			ultimo.setProximo(novo);
 		}
+		
 		ultimo = novo;
 		qtdElementos++;
 	}
@@ -47,15 +48,18 @@ public class ListaEncadeada implements Lista {
 			no = no.getProximo();
 		}
 		
-		if(noAnterior == null) {
-			primeiro = no.getProximo();
-		}
-		
-		noAnterior.setProximo(no.getProximo());
-		qtdElementos--;
-		
-		if(ultimo == no) {
-			ultimo = noAnterior;
+		if(no != null) {
+			if(noAnterior == null) {
+				primeiro = no.getProximo();
+			} else {
+				noAnterior.setProximo(no.getProximo());
+			}
+			
+			if(ultimo == no) {
+				ultimo = noAnterior;
+			}
+	
+			qtdElementos--;
 		}
 	}
 
@@ -88,43 +92,40 @@ public class ListaEncadeada implements Lista {
 		int metade = this.getTamanho() / 2;
 		int contador = 1;
 		
-		while(no != null && contador < this.getTamanho()) {
+		while(no != null) {
 			if(contador > metade) {
-				
+				listaNova.inserir(no.getInfo());
+				this.retirar(no.getInfo());
 			}
+			contador++;
+			no = no.getProximo();
 		}
+		
+		return listaNova;
 	}
 
 	@Override
 	public Lista copiar() {
-		// TODO Auto-generated method stub
-		return null;
+		NoLista no = primeiro;
+		ListaEncadeada listaNova = new ListaEncadeada();
+		while(no != null) {
+			listaNova.inserir(no.getInfo());
+			no = no.getProximo();
+		}
+		
+		return listaNova;
 	}
 
 	@Override
 	public void concatenar(Lista outra) {
-		// TODO Auto-generated method stub
-		
+		for(int i = 0; i < outra.getTamanho(); i++) {
+			this.inserir(outra.pegar(i));
+		}
 	}
 
 	@Override
 	public int getTamanho() {
 		return this.qtdElementos;
-	}
-
-	@Override
-	public void inserir(int valor, int pos) {
-		NoLista no = primeiro;
-		NoLista noAnterior = null;
-		NoLista noNovo = new NoLista();
-		int contador = 0;		
-		
-		while(no != null && no.getInfo() != valor) {
-			no = no.getProximo();
-			noAnterior = noAnterior.getProximo();
-		}
-		
-		
 	}
 
 	@Override
