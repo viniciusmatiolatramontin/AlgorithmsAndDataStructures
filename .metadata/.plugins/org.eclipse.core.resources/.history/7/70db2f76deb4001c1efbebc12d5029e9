@@ -1,0 +1,5 @@
+package lineares.fila;
+
+public class FilaLista implements Fila<T> {
+
+}

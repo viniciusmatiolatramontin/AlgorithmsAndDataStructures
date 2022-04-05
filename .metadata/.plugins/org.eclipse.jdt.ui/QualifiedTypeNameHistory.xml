@@ -1,2 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<qualifiedTypeNameHistroy/>
+<qualifiedTypeNameHistroy>
+    <fullyQualifiedTypeName name="lineares.lista.ListaEncadeada"/>
+    <fullyQualifiedTypeName name="lineares.fila.FilaLista"/>
+    <fullyQualifiedTypeName name="lineares.fila.Fila"/>
+    <fullyQualifiedTypeName name="lineares.fila.FilaVetor"/>
+</qualifiedTypeNameHistroy>

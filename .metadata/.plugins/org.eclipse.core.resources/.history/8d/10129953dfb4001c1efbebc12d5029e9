@@ -1,0 +1,7 @@
+package lineares.testes;
+
+public class TesteFilaLista {
+	public static void main(String[] args) {
+		
+	}
+}

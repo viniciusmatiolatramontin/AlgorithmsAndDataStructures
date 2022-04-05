@@ -1,0 +1,49 @@
+package lineares.fila;
+
+public class FilaVetor<T> implements Fila<T> {
+
+    private int limite;
+    private int tamanhoAtual = 0;
+    private T[] info;
+    private int inicio = 0;
+    
+    public FilaVetor(int limite) {
+        this.info = (T[]) new Object[limite];
+        this.limite = limite;
+    }
+	
+	@Override
+	public void inserir(T valor) {
+		info[(tamanhoAtual + inicio)%limite] = valor;
+		tamanhoAtual++;
+	}
+
+	@Override
+	public T retirar() {
+		info[inicio] = null;
+		if(inicio % 6 == 0) {
+			inicio = 0;
+		} else {
+			inicio++;
+		}
+	}
+
+	@Override
+	public T peek() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean estaVazio() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public void liberar() {
+		// TODO Auto-generated method stub
+		
+	}
+
+}

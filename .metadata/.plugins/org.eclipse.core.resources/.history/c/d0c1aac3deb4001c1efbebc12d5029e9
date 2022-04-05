@@ -1,0 +1,36 @@
+package lineares.fila;
+
+import lineares.lista.ListaEncadeada;
+
+public class FilaLista<T> implements Fila<T> {
+
+	private ListaEncadeada<T> lista = new ListaEncadeada<>();
+	
+	@Override
+	public void inserir(T valor) {
+		lista.inserir(valor);	}
+
+	@Override
+	public T retirar() {
+		lista.retirar(lista.pegar(0));
+	}
+
+	@Override
+	public T peek() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean estaVazia() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public void liberar() {
+		// TODO Auto-generated method stub
+		
+	}
+
+}
