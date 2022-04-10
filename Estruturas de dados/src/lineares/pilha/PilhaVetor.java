@@ -39,6 +39,13 @@ public class PilhaVetor<T> implements Pilha<T> {
         return this.info[tamanho - 1];
     }
 
+    private T pegar(int pos) {
+        if (estaVazia()) {
+            throw new RuntimeException("A lista está vazia!");
+        }
+        return this.info[pos];
+    }
+    
     @Override
     public boolean estaVazia() {
         return this.tamanho == 0;
@@ -50,7 +57,33 @@ public class PilhaVetor<T> implements Pilha<T> {
             desempilhar();
         }
     }
+    
+    public int compara(PilhaVetor<T> p2) {
+    	if(this.getTamanho() < p2.getTamanho()) {
+    		return -1;
+    	}
+    	
+		boolean temMesmosElementos = false;
+		
+		for(int i = 0; i< this.getTamanho(); i++) {
+			if(this.pegar(i) == p2.pegar(i)) {
+				temMesmosElementos = true;
+			} else {
+				temMesmosElementos = false;
+			}
+		}
+		
+    	if(p2.getTamanho() == this.getTamanho() && temMesmosElementos) {
+    		return 0;
+    	}
+    	
+    	return 1;
+    }
 
+    private int getTamanho() {
+    	return this.tamanho;
+    }
+    
     @Override
     public String toString() {
         String elementos = "";
