@@ -1,147 +1,199 @@
 package lineares.lista;
 public class ListaEncadeada<T> implements Lista<T> {
-
 	private NoLista<T> primeiro;
 	private NoLista<T> ultimo;
-	private int qtdElementos;
-	
-	
+	private int qtdElem;
+
 	@Override
 	public void inserir(T valor) {
+		// inserção ao final da lista
 		NoLista<T> novo = new NoLista<>();
 		novo.setInfo(valor);
-		
-		if(this.estaVazia()) {
+
+		if (this.estaVazia()) {
 			primeiro = novo;
 		} else {
 			ultimo.setProximo(novo);
 		}
-		
 		ultimo = novo;
-		qtdElementos++;
+		qtdElem++;
+	}
+
+	@Override
+	public String exibir() {
+		NoLista<T> p = primeiro;
+		String resultado = "[";
+
+		while (p != null) {
+			resultado += p.getInfo() + ", ";
+			p = p.getProximo();
+		}
+
+		return resultado + "]";
 	}
 
 	@Override
 	public int buscar(T valor) {
+		int posicao = 0;
 		NoLista<T> p = primeiro;
-		
-		for(int i = 0; i < qtdElementos; i++) {
-			if(p != null) {
-				if(p.getInfo().equals(valor)) {
-					return i;
-				}
-			
-				p = p.getProximo();
+
+		while (p != null) {
+			if (p.getInfo().equals(valor)) {
+				return posicao;
 			}
+			posicao++;
+			p = p.getProximo();
 		}
-		
 		return -1;
 	}
 
 	@Override
 	public void retirar(T valor) {
-		NoLista<T> no = primeiro;
-		NoLista<T> noAnterior = null;
-			
-		while(no != null && !no.getInfo().equals(valor)) {
-			noAnterior = no;
-			no = no.getProximo();
+		NoLista<T> anterior = null;
+		NoLista<T> p = primeiro;
+
+		while (p != null && !p.getInfo().equals(valor)) {
+			anterior = p;
+			p = p.getProximo();
 		}
-		
-		if(no != null) {
-			if(noAnterior == null) {
-				primeiro = no.getProximo();
+
+		if (p != null) { // significa que encontrou o elemento a ser retirado
+			if (anterior == null) {
+				primeiro = p.getProximo();
 			} else {
-				noAnterior.setProximo(no.getProximo());
+				anterior.setProximo(p.getProximo());
 			}
-			
-			if(ultimo == no) {
-				ultimo = noAnterior;
+			qtdElem--;
+			if (ultimo == p) {
+				ultimo = anterior;
 			}
-	
-			qtdElementos--;
 		}
-	}
-
-	@Override
-	public String exibir() {
-		String resultado = "Lista: [";
-		NoLista<T> no = primeiro;
-		
-		while(no != null) {
-			resultado += no.getInfo() + ", ";
-			no = no.getProximo();
-		}
-		
-		return resultado + "]";
-	}
-
-	@Override
-	public boolean estaVazia() {
-		if(primeiro == null) {
-			return true;
-		} else {
-			return false;
-		}
-	}
-
-	@Override
-	public Lista<T> dividir() {
-		NoLista<T> no = primeiro;
-		ListaEncadeada<T> listaNova = new ListaEncadeada<>();
-		int metade = this.getTamanho() / 2;
-		int contador = 1;
-		
-		while(no != null) {
-			if(contador > metade) {
-				listaNova.inserir(no.getInfo());
-			} else {
-				
-			}
-			contador++;
-			no = no.getProximo();
-		}
-		
-		return listaNova;
 	}
 
 	@Override
 	public Lista<T> copiar() {
+		ListaEncadeada<T> novaLista = new ListaEncadeada<>();
 		NoLista<T> no = primeiro;
-		ListaEncadeada<T> listaNova = new ListaEncadeada<>();
-		while(no != null) {
-			listaNova.inserir(no.getInfo());
+
+		while (no != null) {
+			novaLista.inserir(no.getInfo());
 			no = no.getProximo();
 		}
-		
-		return listaNova;
+
+		return novaLista;
 	}
 
 	@Override
-	public void concatenar(Lista<T> outra) {
-		for(int i = 0; i < outra.getTamanho(); i++) {
+	public void concatenar(Lista<T> outra) { // contribuição do Adrian
+		for (int i = 0; i < outra.getTamanho(); i++) {
 			this.inserir(outra.pegar(i));
 		}
 	}
 
 	@Override
 	public int getTamanho() {
-		return this.qtdElementos;
+		return qtdElem;
 	}
 
 	@Override
-	public T pegar(int pos) {
-		if(pos < 0 || pos >= this.qtdElementos) {
-			throw new IndexOutOfBoundsException("Posiçao="+pos+"; Tamanho="+this.qtdElementos);
+	public boolean estaVazia() {
+		return (primeiro == null);
+	}
+
+	@Override
+	 public Lista<T> dividir() {  // Contribuição do Vinícius
+        NoLista<T> no = primeiro;
+        ListaEncadeada<T> listaNova = new ListaEncadeada<>();
+        int metade = this.getTamanho() / 2;
+        int contador = 1;
+        NoLista<T> novoUltimo = null;
+       
+        while(no != null) {
+            if(contador > metade) {
+                listaNova.inserir(no.getInfo());
+            }
+            else {
+            	novoUltimo = no;
+            }
+            contador++;
+            no = no.getProximo();
+        }
+        ultimo = novoUltimo;
+        ultimo.setProximo(null);
+        qtdElem = metade;
+        return listaNova;
+    }
+	
+	@Override
+	public T pegar(int pos) { // Contribuição do Vinícius
+		if (pos < 0 || pos >= this.qtdElem) {
+			throw new IndexOutOfBoundsException("Posicao=" + pos + "; Tamanho=" + qtdElem);
 		}
-		
 		NoLista<T> no = primeiro;
-		
-		for(int i = 0; i < pos; i++) {
+
+		for (int i = 0; i < pos; i++) {
 			no = no.getProximo();
 		}
-		
+
 		return no.getInfo();
 	}
 
+	public T pegar2(int posicao) { // contribuição do Rodrigo
+		if (posicao < 0 || posicao >= this.qtdElem) {
+			throw new IndexOutOfBoundsException("Posicao=" + posicao + "; Tamanho=" + qtdElem);
+		}
+
+		NoLista<T> p = primeiro;
+		int pos = 0;
+		while (p != null) {
+			if (pos == posicao) {
+				return p.getInfo();
+			}
+			pos++;
+			p = p.getProximo();
+		}
+		return null; // nunca deveria chegar aqui
+	}
+
+	public int ultimoIndiceDe(T x) {
+		int indice = -1;
+		int contador = 0;
+		NoLista<T> p = primeiro;
+		
+		while(p != null) {
+			if (p.getInfo().equals(x)) {
+				indice = contador;
+			}
+			
+			contador++;
+			p = p.getProximo();
+		}
+		
+		return indice;
+	}
+	
+	public ListaEncadeada<T> intercala(ListaEncadeada<T> outra) {
+		int contador = 0;
+		int contadorImpar = 0;
+		int contadorPar = 0;
+		NoLista<T> p = primeiro;
+		ListaEncadeada<T> nova = new ListaEncadeada<>();
+		
+		while(contador <= (this.getTamanho() + outra.getTamanho())) {
+			if(contadorImpar < outra.getTamanho() && contador % 2 != 0) {
+				nova.inserir(outra.pegar(contadorImpar));
+				contadorImpar++;
+			}
+			
+			if(contadorPar < this.getTamanho() && contador % 2 == 0) {
+				nova.inserir(this.pegar(contadorPar));
+				contadorPar++;
+			}
+			
+			contador++;
+		}
+		
+		return nova;
+	}
+	
 }

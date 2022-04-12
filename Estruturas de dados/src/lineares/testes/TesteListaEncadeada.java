@@ -51,6 +51,19 @@ public class TesteListaEncadeada {
 			System.out.println("Lista 2 = "+lista2.exibir());
 			System.out.println("Lista 2 tam = "+lista2.getTamanho());
 			System.out.println("Lista copiada = "+lista3.exibir());
+			
+			
+			ListaEncadeada<String> listaLetras = new ListaEncadeada<>();
+			ListaEncadeada<String> listaLetras2 = new ListaEncadeada<>();
+			listaLetras.inserir("A");
+			listaLetras.inserir("B");
+			listaLetras.inserir("C");
+			listaLetras.inserir("C");
+			listaLetras.inserir("L");
+			listaLetras2.inserir("D");
+			listaLetras2.inserir("E");
+			listaLetras2.inserir("F");
+			System.out.println(listaLetras.intercala(listaLetras2).exibir());
 	}
 
 }
