@@ -1,0 +1,21 @@
+package arvores;
+
+public class NoArvoreBinaria<T> {
+	private T info;
+	private NoArvoreBinaria<T> dir;
+	private NoArvoreBinaria<T> esq;
+	
+	public NoArvoreBinaria(T info) {
+		this.info = info;
+	}
+	
+	public NoArvoreBinaria(T info, NoArvoreBinaria<T> dir, NoArvoreBinaria<T> esq) {
+		this.info = info;
+		this.dir = dir;
+		this.esq = esq;
+	}
+	
+	public NoArvoreBinaria<T> pertence(T info) {
+		
+	}
+}

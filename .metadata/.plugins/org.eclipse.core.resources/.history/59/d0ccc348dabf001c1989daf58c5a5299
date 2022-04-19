@@ -1,0 +1,5 @@
+package arvores;
+
+public class NoArvoreBinaria<T> {
+	private T info;
+}

@@ -1,0 +1,12 @@
+package arvores;
+
+public class ArvoreBinaria<T> {
+	
+	private NoArvoreBinaria raiz;
+	
+	public ArvoreBinaria() {
+		
+	}
+	
+	public setRaiz(NoArvoreBinaria no)
+}

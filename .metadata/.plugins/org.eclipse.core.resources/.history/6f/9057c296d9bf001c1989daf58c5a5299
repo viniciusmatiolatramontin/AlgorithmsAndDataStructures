@@ -1,0 +1,14 @@
+package arvores;
+
+public class ArvoreBinaria<T> {
+	
+	private NoArvoreBinaria raiz;
+	
+	public ArvoreBinaria() {
+		
+	}
+	
+	public void setRaiz(NoArvoreBinaria no) {
+		this.raiz = no;
+	}
+}

@@ -1,0 +1,10 @@
+package arvores;
+
+public class TesteArvore {
+
+	public static void main(String[] args) {
+		NoArvoreBinaria<Integer> no7 = new NoArvoreBinaria<>(7);
+		NoArvoreBinaria<Integer> no6 = new NoArvoreBinaria<>(6, no7, null);
+	}
+
+}

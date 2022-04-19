@@ -1,0 +1,26 @@
+package arvores;
+
+public class ArvoreBinaria<T> {
+	
+	private NoArvoreBinaria raiz;
+	
+	public ArvoreBinaria() {
+		
+	}
+	
+	public void setRaiz(NoArvoreBinaria no) {
+		this.raiz = no;
+	}
+	
+	public boolean vazia() {
+		if(raiz == null) {
+			return true;
+		}
+		
+		return false;
+	}
+	
+	public NoArvoreBinaria<T> pertence(T info) {
+		
+	}
+}
