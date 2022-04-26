@@ -50,4 +50,24 @@ public class NoArvoreBinaria<T> {
 		
 		return result + ")";
 	}
+
+	public NoArvoreBinaria<T> getDir() {
+		return dir;
+	}
+
+	public void setDir(NoArvoreBinaria<T> dir) {
+		this.dir = dir;
+	}
+
+	public NoArvoreBinaria<T> getEsq() {
+		return esq;
+	}
+
+	public void setEsq(NoArvoreBinaria<T> esq) {
+		this.esq = esq;
+	}
+
+	public void setInfo(T info) {
+		this.info = info;
+	}
 }

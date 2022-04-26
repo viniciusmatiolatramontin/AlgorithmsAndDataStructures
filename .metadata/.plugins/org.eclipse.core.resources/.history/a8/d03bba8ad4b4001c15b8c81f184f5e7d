@@ -1,5 +1,0 @@
-package lineares.fila;
-
-public class FilaVetor implements Fila<T> {
-
-}

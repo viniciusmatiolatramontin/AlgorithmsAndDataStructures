@@ -14,7 +14,7 @@ public class TesteArvore {
 		
 		NoArvoreBinaria<Integer> no1 = new NoArvoreBinaria<>(1, no2, no3);
 		
-		ArvoreBinaria<Integer> arvore = new ArvoreBinaria<>();
+		ArvoreBinariaAbstract<Integer> arvore = new ArvoreBinariaAbstract<>();
 		arvore.setRaiz(no1);
 		
 		System.out.println(arvore.toString());

@@ -1,5 +1,0 @@
-package lineares.fila;
-
-public interface Pilha {
-
-}
