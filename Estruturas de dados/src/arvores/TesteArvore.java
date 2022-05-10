@@ -3,22 +3,25 @@ package arvores;
 public class TesteArvore {
 
 	public static void main(String[] args) {
-		NoArvoreBinaria<Integer> no7 = new NoArvoreBinaria<>(7);
-		NoArvoreBinaria<Integer> no6 = new NoArvoreBinaria<>(6, no7, null);
+		NoArvoreBinariaBST<Integer> no5 = new NoArvoreBinariaBST<>(7);
+		NoArvoreBinariaBST<Integer> no4 = new NoArvoreBinariaBST<>(6);
 		
-		NoArvoreBinaria<Integer> no3 = new NoArvoreBinaria<>(3, null, no6);
+		NoArvoreBinariaBST<Integer> no3 = new NoArvoreBinariaBST<>(3);
 	
-		NoArvoreBinaria<Integer> no4 = new NoArvoreBinaria<>(4);
-		NoArvoreBinaria<Integer> no5 = new NoArvoreBinaria<>(5);
-		NoArvoreBinaria<Integer> no2 = new NoArvoreBinaria<>(2, no4, no5);
+		NoArvoreBinariaBST<Integer> no2 = new NoArvoreBinariaBST<>(4);
+		NoArvoreBinariaBST<Integer> no1 = new NoArvoreBinariaBST<>(5);
 		
-		NoArvoreBinaria<Integer> no1 = new NoArvoreBinaria<>(1, no2, no3);
+		no1.setEsq(no2);
+		no1.setDir(no4);
+		no4.setDir(no5);
+		no2.setEsq(no3);
 		
-		ArvoreBinariaAbstract<Integer> arvore = new ArvoreBinariaAbstract<>();
+		ArvoreBinariaBST<Integer> arvore = new ArvoreBinariaBST<>();
 		arvore.setRaiz(no1);
 		
 		System.out.println(arvore.toString());
-		System.out.println(arvore.pertence(6).getInfo());
+		arvore.retirar(5);
+		System.out.println(arvore.toString());
 	}
 
 }

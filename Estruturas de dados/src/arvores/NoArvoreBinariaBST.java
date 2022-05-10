@@ -35,5 +35,39 @@ public class NoArvoreBinariaBST<T extends Comparable<T>> extends NoArvoreBinaria
 		}
 	}
 	
+	public NoArvoreBinariaBST<T> buscarPai(NoArvoreBinariaBST<T> no) {
+		if(this.getDir() == no || this.getEsq() == no) {
+			return this;
+		} else {
+			if(no.getInfo().compareTo(this.getInfo()) < 0) {
+				return ((NoArvoreBinariaBST<T>)this.getEsq()).buscarPai(no);
+			} else {
+				return ((NoArvoreBinariaBST<T>)this.getDir()).buscarPai(no);
+			}
+		}
+	}	
 	
+	public boolean temUmFilho() {
+		if(this.getEsq() != null ^ this.getDir() != null) {
+			return true;
+		}
+		
+		return false;
+	}
+	
+	public boolean temFilhos() {
+		if(this.getEsq() != null && this.getDir() == null) {
+			return true;
+		}
+		
+		return false;
+	}
+	
+	public boolean eFolha() {
+		if(this.getEsq() == null && this.getDir() == null) {
+			return true;
+		}
+		
+		return false;
+	}
 }
