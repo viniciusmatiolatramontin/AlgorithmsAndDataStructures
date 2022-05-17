@@ -38,7 +38,7 @@ public class NoArvoreBinaria<T> {
 	}
 	
 	public String imprimePre() {
-		String result = "(" + this.getInfo().toString();
+		String result = "("	+ this.getInfo().toString();
 		
 		if(esq != null) {
 			result += esq.imprimePre();
@@ -51,6 +51,23 @@ public class NoArvoreBinaria<T> {
 		return result + ")";
 	}
 
+	public String imprimeOrdenado() {
+		String result = "";
+		
+		if(esq != null) {
+			result += esq.imprimeOrdenado();
+		}
+		
+		result += this.getInfo().toString() + " ";
+		
+		if(dir != null) {
+			result += dir.imprimeOrdenado();
+		}
+		
+		return result + "";
+	}
+
+	
 	public NoArvoreBinaria<T> getDir() {
 		return dir;
 	}

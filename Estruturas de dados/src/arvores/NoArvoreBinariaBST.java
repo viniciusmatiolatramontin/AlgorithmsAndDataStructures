@@ -1,73 +1,84 @@
 package arvores;
 
-public class NoArvoreBinariaBST<T extends Comparable<T>> extends NoArvoreBinaria<T>{
+public class NoArvoreBinariaBST<T extends Comparable<T>> extends NoArvoreBinaria<T> {
 
 	public NoArvoreBinariaBST(T info) {
 		super(info);
 	}
 
-	public void inserir(T info) {
-		if(info.compareTo(this.getInfo()) < 0) {
-			if(this.getEsq() == null) {
-				this.setEsq(new NoArvoreBinaria<T>(info));;
+	public void inserir(T valor) {
+		if (valor.compareTo(this.getInfo()) < 0) {
+			if (this.getEsq() == null) {
+				this.setEsq(new NoArvoreBinariaBST<T>(valor));
 			} else {
-				((NoArvoreBinariaBST<T>)this.getEsq()).inserir(info);
+				((NoArvoreBinariaBST<T>) this.getEsq()).inserir(valor);
 			}
 		} else {
-			if(this.getDir() == null) {
-				this.setDir(new NoArvoreBinaria<T>(info));;
+			if (this.getDir() == null) {
+				this.setDir(new NoArvoreBinariaBST<T>(valor));
 			} else {
-				((NoArvoreBinariaBST<T>)this.getDir()).inserir(info);
+				((NoArvoreBinariaBST<T>) this.getDir()).inserir(valor);
 			}
 		}
 	}
-	
-	
-	public NoArvoreBinariaBST<T> buscar(T info) {
-		if(info.equals(this.getInfo())) {
+
+	public NoArvoreBinariaBST<T> buscar(T valor) {
+		if (valor.compareTo(this.getInfo()) == 0) {
 			return this;
 		} else {
-			if(info.compareTo(this.getInfo()) < 0) {
-				return ((NoArvoreBinariaBST<T>)this.getEsq()).buscar(info);
+			if (valor.compareTo(this.getInfo()) < 0) {
+				if (this.getEsq() == null) {
+					return null;
+				} else {
+					return ((NoArvoreBinariaBST<T>) this.getEsq()).buscar(valor);
+				}
 			} else {
-				return ((NoArvoreBinariaBST<T>)this.getDir()).buscar(info);
+				if (this.getDir() == null) {
+					return null;
+				} else {
+					return ((NoArvoreBinariaBST<T>) this.getDir()).buscar(valor);
+				}
 			}
 		}
 	}
+
+	public boolean ehFolha() {
+		return (this.getEsq() == null && this.getDir() == null);
+	}
+
+	public boolean temApenasUmFilho() {
+		return (this.getEsq() == null ^ this.getDir() == null); // ou exclusivo
+	}
+
+	public NoArvoreBinariaBST<T> getNoSucessor() {
+		NoArvoreBinariaBST<T> sucessor = (NoArvoreBinariaBST<T>) this.getDir();
+		while(sucessor.getEsq() != null) {
+			sucessor = (NoArvoreBinariaBST<T>)sucessor.getEsq();
+		}
+		return sucessor;
+	}
 	
-	public NoArvoreBinariaBST<T> buscarPai(NoArvoreBinariaBST<T> no) {
-		if(this.getDir() == no || this.getEsq() == no) {
-			return this;
+	public NoArvoreBinariaBST<T> getNoAntecessor() {
+		NoArvoreBinariaBST<T> sucessor = (NoArvoreBinariaBST<T>) this.getEsq();
+		while(sucessor.getDir() != null) {
+			sucessor = (NoArvoreBinariaBST<T>)sucessor.getDir();
+		}
+		return sucessor;
+	}
+	
+	public T menorElemento() {
+		if(this.getEsq() != null) {
+			return ((NoArvoreBinariaBST<T>) this.getEsq()).menorElemento();
 		} else {
-			if(no.getInfo().compareTo(this.getInfo()) < 0) {
-				return ((NoArvoreBinariaBST<T>)this.getEsq()).buscarPai(no);
-			} else {
-				return ((NoArvoreBinariaBST<T>)this.getDir()).buscarPai(no);
-			}
+			return this.getInfo();
 		}
-	}	
-	
-	public boolean temUmFilho() {
-		if(this.getEsq() != null ^ this.getDir() != null) {
-			return true;
-		}
-		
-		return false;
 	}
 	
-	public boolean temFilhos() {
-		if(this.getEsq() != null && this.getDir() == null) {
-			return true;
+	public T maiorElemento() {
+		if(this.getEsq() != null) {
+			return ((NoArvoreBinariaBST<T>) this.getDir()).menorElemento();
+		} else {
+			return this.getInfo();
 		}
-		
-		return false;
-	}
-	
-	public boolean eFolha() {
-		if(this.getEsq() == null && this.getDir() == null) {
-			return true;
-		}
-		
-		return false;
 	}
 }
