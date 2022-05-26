@@ -26,7 +26,7 @@ public class TesteArvore {
 		a.setRaiz(n1);	
 		
 		System.out.println(a.toString());
-		System.out.println(a.pertence(3));
+		System.out.println(a.pertence(3).getInfo());
 		System.out.println(a.getAltura());
 	}
 
