@@ -32,4 +32,12 @@ public class Arvore<T extends Comparable<T>> {
 		
 		return this.raiz.contaAltura() - 1;
 	}
+	
+	public int getNivel(T info) {
+		if(this.vazia()) {
+			return -1;
+		}
+		
+		return this.raiz.contaNivel(info);
+	}
 }

@@ -75,4 +75,22 @@ public class NoArvore<T extends Comparable<T>> {
 		
 		return altura;
 	}
+	
+	public int contaNivel(T info) {	
+		int nivel = 1;
+		
+		if(this.getInfo().equals(info)) {
+			return 0;
+		}
+		
+		if(this.getFilho() != null) {
+			nivel += this.getFilho().contaNivel(info);
+		}
+		
+		if(this.getIrmao() != null && this.getIrmao().pertence(info) != null) {
+			nivel = this.getIrmao().contaNivel(info);
+		}
+		
+		return nivel;
+	}
 }
